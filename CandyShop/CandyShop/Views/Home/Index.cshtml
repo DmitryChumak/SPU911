@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CandyShop.Models.Car>
+
+
+    @if (ViewBag.Thanks != null)
+    {
+        <div class="display-2" style="color:green;">@ViewBag.Thanks</div>
+    }
+
+    <h2>Cars</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Model</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in Model)
+            {
+                <tr>
+                    <td>@car.Title</td>
+                    <td>@car.Model</td>
+                    <td>@car.Price</td>
+                    <th><a href="~/Home/Buy/@car.CarId" class="btn btn-secondary">Buy</a></th>
+                </tr>
+            }
+        </tbody>
+    </table>
