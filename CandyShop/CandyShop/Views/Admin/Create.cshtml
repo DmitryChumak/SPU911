@@ -1,0 +1,22 @@
+﻿@model CandyShop.Models.Car
+
+<form method="post">
+        @*<div>
+            <label for="title">Title</label>
+            <input id="title" type="text" value="@Model.Title" name="Title" />
+        </div>*@
+    @Html.HiddenFor(x => x.CarId)
+    <div>
+        @Html.LabelFor(x => x.Title)
+        @Html.TextBoxFor(x => x.Title)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Model)
+        @Html.TextBoxFor(x => x.Model)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Price)
+        @Html.TextBoxFor(x => x.Price)
+    </div>
+    <input type="submit" value="Save" />
+</form>

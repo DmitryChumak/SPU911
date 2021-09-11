@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CandyShop.Models.Car>
+
+<div>
+    @Html.ActionLink("Create", "Create", "Admin", null, new { @class="btn btn-primary" })
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Model</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+        <tr>
+            <td>@car.Title</td>
+            <td>@car.Model</td>
+            <td>@car.Price</td>
+            <td>
+                <a asp-controller="Admin" asp-action="Create" asp-route-carId="@car.CarId" class="btn btn-warning">Edit</a>
+              @*  <a href="~/Admin/Create/@car.CarId" class="btn btn-warning">Edit</a>*@
+            </td>
+            <td>
+                <form method="post" action="~/Admin/Delete">
+                    <input type="hidden" value="@car.CarId" name="carId" />
+                    <input type="submit" class="btn btn-danger" value="Delete" />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

@@ -36,9 +36,22 @@ namespace CandyShop.Controllers
         [HttpPost]
         public IActionResult Buy(Order order)
         {
-            context.Orders.Add(order);
-            context.SaveChanges();
-            return RedirectToAction("Index",new { thanks= "Thank you for purchase!" });
+            if (order.User?.ToLower() == "andrey")
+            {
+                ModelState.AddModelError("User", "Андрей, уходиТЕ!");
+                ModelState.AddModelError("KU", "Андрей, KU!");
+            }
+            if (ModelState.IsValid)
+            {
+                context.Orders.Add(order);
+                context.SaveChanges();
+                return RedirectToAction("Index", new { thanks = "Thank you for purchase!" });
+            }
+            else
+            {
+                return View(order);
+            }
+          
         }
     }
 }
