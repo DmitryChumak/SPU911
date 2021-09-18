@@ -29,10 +29,12 @@ namespace CandyShop
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddMvc();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSession();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

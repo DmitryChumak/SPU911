@@ -19,12 +19,20 @@
         <tbody>
             @foreach (var car in Model)
             {
-                <tr>
-                    <td>@car.Title</td>
-                    <td>@car.Model</td>
-                    <td>@car.Price</td>
-                    <th><a href="~/Home/Buy/@car.CarId" class="btn btn-secondary">Buy</a></th>
-                </tr>
+            <tr>
+                <td>@car.Title</td>
+                <td>@car.Model</td>
+                <td>@car.Price</td>
+                <td>
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        <input type="hidden" value="@car.CarId" name="CarId" />
+                        @Html.Hidden("returnUrl", Context.Request.Path)
+                        <input type="submit" value="+ Add To Cart" class="btn btn-primary" />
+                    }
+                </td>
+                <td><a href="~/Home/Buy/@car.CarId" class="btn btn-secondary">Buy</a></td>
+            </tr>
             }
         </tbody>
     </table>
