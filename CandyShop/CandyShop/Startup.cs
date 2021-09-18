@@ -1,4 +1,5 @@
 using CandyShop.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +28,13 @@ namespace CandyShop
 
             services.AddDbContext<CarContext>(options => 
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new PathString("/Account/Login");
+                    options.AccessDeniedPath = new PathString("/Account/Login");
+                });
             services.AddMvc();
             services.AddSession();
         }
@@ -41,6 +48,10 @@ namespace CandyShop
             }
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
