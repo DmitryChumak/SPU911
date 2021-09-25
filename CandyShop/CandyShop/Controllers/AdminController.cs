@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CandyShop.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class AdminController : Controller
     {
         CarContext context;

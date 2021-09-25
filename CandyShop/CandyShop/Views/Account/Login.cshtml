@@ -7,6 +7,7 @@
 <form asp-action="Login" asp-controller="Account" asp-antiforgery="true">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
+        @Html.HiddenFor(x => x.ReturnUrl)
         <div>
             @Html.LabelFor(x => x.Email)
             @Html.TextBoxFor(x => x.Email)
@@ -16,6 +17,11 @@
             @Html.LabelFor(x => x.Password)
             @Html.PasswordFor(x => x.Password)
             @Html.ValidationMessageFor(x => x.Password)
+        </div>
+        <div>
+            @Html.LabelFor(x => x.RememberMe)
+            @Html.CheckBoxFor(x => x.RememberMe)
+            @Html.ValidationMessageFor(x => x.RememberMe)
         </div>
         <input type="submit" value="Login" class="btn btn-primary" />
     </div>
