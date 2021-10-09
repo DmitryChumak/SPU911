@@ -35,6 +35,11 @@ namespace CandyShop
 
             services.AddIdentity<User, IdentityRole>()
                         .AddEntityFrameworkStores<IdentityContext>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/Login";
+                options.LoginPath = "/Account/Login";
+            });
             services.AddMvc();
             services.AddSession();
         }
@@ -46,6 +51,7 @@ namespace CandyShop
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePages("text/html", "<h1>Error 404</h1>");
             app.UseStaticFiles();
             app.UseRouting();
 

@@ -1,38 +1,14 @@
-﻿@model IEnumerable<CandyShop.Models.Car>
+﻿@model CandyShop.Models.ViewModels.CarListViewModel
 
+<h2>Cars</h2>
 
-    @if (ViewBag.Thanks != null)
-    {
-        <div class="display-2" style="color:green;">@ViewBag.Thanks</div>
-    }
+@*@await Html.PartialAsync("CarsList")*@ 
 
-    <h2>Cars</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Model</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var car in Model)
-            {
-            <tr>
-                <td>@car.Title</td>
-                <td>@car.Model</td>
-                <td>@car.Price</td>
-                <td>
-                    @using (Html.BeginForm("AddToCart", "Cart"))
-                    {
-                        <input type="hidden" value="@car.CarId" name="CarId" />
-                        @Html.Hidden("returnUrl", Context.Request.Path)
-                        <input type="submit" value="+ Add To Cart" class="btn btn-primary" />
-                    }
-                </td>
-                <td><a href="~/Home/Buy/@car.CarId" class="btn btn-secondary">Buy</a></td>
-            </tr>
-            }
-        </tbody>
-    </table>
+<div class="form-group">
+    <input type="text" id="searchText" class="form-control" />
+    <button id="search" class="btn btn-primary">Search</button>
+</div>
+
+<div id="car-list">
+
+</div>
