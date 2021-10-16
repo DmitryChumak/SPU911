@@ -52,6 +52,10 @@ namespace CandyShop
                 app.UseDeveloperExceptionPage();
             }
             app.UseStatusCodePages("text/html", "<h1>Error 404</h1>");
+         
+            
+            app.UseDefaultFiles();
+            
             app.UseStaticFiles();
             app.UseRouting();
 
@@ -65,6 +69,7 @@ namespace CandyShop
                     name: "Default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
+                endpoints.MapControllers();
             });
         }
     }

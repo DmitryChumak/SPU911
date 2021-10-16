@@ -10,3 +10,5 @@ $('#search').on('click', function () {
 
     $('#car-list').load(`/Home/CarsList/?search=${searchText}`)
 })
+
+//REST
