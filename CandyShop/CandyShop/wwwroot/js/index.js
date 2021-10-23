@@ -25,7 +25,11 @@ function showError(errors) {
 }
 
 async function getCars() {
-    const response = await fetch('/api/cars')
+    const response = await fetch('/api/cars', {
+        headers: {
+            'Authorization': 'bearer ' + sessionStorage.getItem('access_token')
+        }
+    })
     if (response.ok === true) {
         const cars = await response.json()
         let rows = document.querySelector('tbody')
@@ -84,6 +88,30 @@ async function createCar(title, model, price) {
 
 }
 
+
+async function getTokenAsync() {
+    const credentials = {
+        login: document.querySelector('#login').value,
+        password: document.querySelector('#password').value
+    }
+
+    const response = await fetch('api/account/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+    })
+
+    const data = await response.json()
+
+    if (response.ok === true) {
+        //console.log(data.access_token)
+        sessionStorage.setItem('access_token', data.access_token)
+    } else {
+        console.log(response.status, data.error)
+    }
+}
+
+
 document.forms['carForm'].addEventListener('submit', function (e) {
     e.preventDefault()
     const form = document.forms['carForm']
@@ -92,6 +120,11 @@ document.forms['carForm'].addEventListener('submit', function (e) {
     const price = form.elements['price'].value
 
     createCar(title, model, price)
+})
+
+
+document.querySelector('#submitLogin').addEventListener('click', function () {
+    getTokenAsync()
 })
 
 getCars()
