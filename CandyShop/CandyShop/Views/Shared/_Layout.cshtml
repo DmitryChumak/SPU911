@@ -26,12 +26,18 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <span>
+                        @*@await Component.InvokeAsync("Date")*@ 
+                        <vc:date show-time="true"></vc:date>
+                    </span>
+                </div>
                 @if (User.Identity.IsAuthenticated)
                 {
-            <div>
-                <span>Welcome, @User.Identity.Name</span>
-                <a asp-action="Logout" asp-controller="Account" class="btn btn-secondary">Logout</a>
-            </div>
+                    <div>
+                        <span>Welcome, @User.Identity.Name</span>
+                        <a asp-action="Logout" asp-controller="Account" class="btn btn-secondary">Logout</a>
+                    </div>
                 }
             </div>
         </nav>
